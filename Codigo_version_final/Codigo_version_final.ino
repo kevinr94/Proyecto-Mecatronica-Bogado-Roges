@@ -174,11 +174,14 @@ static int lecturasCorrectas = 0;
 unsigned long ultimaLecturaTemp = 0;
 bool esperandoTemperatura = false;
 // wifi casa
-const char* ssid = "";
-const char* password = "";
+const char* ssid = "MOVISTAR Wifi6";
+const char* password = "Movistar827";
+//WiFi celular
+/*const char* ssid = "GalaxyS21FE";
+const char* password = "uouk4373";*/
 // Initialize Telegram BOT
-#define BOTtoken ""  // el token de tu BOT, lo obtenemos de BotFather
-#define CHAT_ID  ""
+#define BOTtoken "7864124463:AAGqeX4AymXzyKB_yKku8ZIlFUbBW9uAJS4"  // el token de tu BOT, lo obtenemos de BotFather
+#define CHAT_ID  "1430541964"
 bool mensaje1, mensaje2, mensaje3, mensaje4, mensaje5, mensaje6, mensaje7, mensaje8, mensaje9, mensaje10, mensaje11;
 
 WiFiClientSecure client;
@@ -295,7 +298,7 @@ if (inicio_programa == true) {
         estadoIlumAnterior = estadoIlum;
       }
 
-      if (data.humidity >= 45) {
+      if (data.humidity >= 50) {
         estadoVent = true;
       } else {
         estadoVent = false;
@@ -314,7 +317,6 @@ if (inicio_programa == true) {
         if (tiempoActual - inicioCicloMillis <= duracionBomba) {
           // Mientras dure el ciclo de 2 horas
           lectura_sensores();  // Gestiona el relay de sensores
-          estadoServo = true;
           if(mensaje1){
             encolarMensaje("Inicio de ciclo recirculación. Medición y ajuste EC");
             mensaje1 = false;
@@ -325,6 +327,7 @@ if (inicio_programa == true) {
             ajuste_ec();       // Ajuste de EC
             if (aviso_medicion_ph) {
               ecListo = true;
+              estadoServo = true;
               encolarMensaje("EC correcto: "+String(tdsValue));
               aviso_medicion_ph = false;
               esperaPHIniciada = true;
@@ -345,6 +348,7 @@ if (inicio_programa == true) {
                 phListo = true;
                 encolarMensaje("pH bien: "+String(pH));
                 aviso_ph_fin = false;
+                estadoServo = false;
                 // Preparar segunda medición
                 enEsperaSegundaMedicion = true;
                 tiempoEsperaSegundaMedicion = millis();
@@ -360,7 +364,7 @@ if (inicio_programa == true) {
           }
           else if (enEsperaSegundaMedicion && !segundaMedicionHecha) {
             // Esperar 30 minutos antes de segunda medición EC
-            if (!segundaMedicionECHecha && millis() - tiempoEsperaSegundaMedicion >= 120000UL) { // 30 minutos
+            if (!segundaMedicionECHecha && millis() - tiempoEsperaSegundaMedicion >= 1800000UL) { // 30 minutos
               sensor_ph = false; // Apaga PH, prende EC
               lecturaTDS();      // Lee EC
               ajuste_ec();       // Ajuste de EC
@@ -371,6 +375,7 @@ if (inicio_programa == true) {
               if (aviso_medicion_ph) {
                 encolarMensaje("EC bien: "+String(tdsValue));
                 aviso_medicion_ph = false;
+                estadoServo = true;
                 esperaPHIniciada = true;
                 tiempoEsperaPH = millis();
                 sensor_ph = true; // Apaga EC, prende PH
@@ -389,6 +394,7 @@ if (inicio_programa == true) {
               if (aviso_ph_fin) {
                 encolarMensaje("pH bien: "+String(pH));
                 sensor_ph = false;
+                estadoServo = false;
                 aviso_ph_fin = false;
                 segundaMedicionPHHecha = true;
                 segundaMedicionHecha = true;
@@ -404,6 +410,7 @@ if (inicio_programa == true) {
             mensaje6 = false;
           }
           estadoBomba = false;
+          estadoServo = false;
           cicloActivo = false;
         }
       }
@@ -937,8 +944,8 @@ void ajuste_ec() {
     ultimaEjecucion1 = millis();
     return;
   }
-  // Espera de 12 segundos entre inyecciones
-  if (esperando1 && (tiempoActual11 - ultimaEjecucion1 < 12000)) {
+  // Espera de 60 segundos entre inyecciones
+  if (esperando1 && (tiempoActual11 - ultimaEjecucion1 < 60000)) {
     return;
   } else if (esperando1) {
     esperando1 = false;
