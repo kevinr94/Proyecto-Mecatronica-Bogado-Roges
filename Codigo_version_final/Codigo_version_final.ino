@@ -174,14 +174,14 @@ static int lecturasCorrectas = 0;
 unsigned long ultimaLecturaTemp = 0;
 bool esperandoTemperatura = false;
 // wifi casa
-const char* ssid = "MOVISTAR Wifi6";
-const char* password = "Movistar827";
+const char* ssid = "";
+const char* password = "";
 //WiFi celular
-/*const char* ssid = "GalaxyS21FE";
-const char* password = "uouk4373";*/
+/*const char* ssid = "";
+const char* password = "";*/
 // Initialize Telegram BOT
-#define BOTtoken "7864124463:AAGqeX4AymXzyKB_yKku8ZIlFUbBW9uAJS4"  // el token de tu BOT, lo obtenemos de BotFather
-#define CHAT_ID  "1430541964"
+#define BOTtoken ""  // el token de tu BOT, lo obtenemos de BotFather
+#define CHAT_ID  ""
 bool mensaje1, mensaje2, mensaje3, mensaje4, mensaje5, mensaje6, mensaje7, mensaje8, mensaje9, mensaje10, mensaje11;
 
 WiFiClientSecure client;
