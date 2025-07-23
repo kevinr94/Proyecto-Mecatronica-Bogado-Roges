@@ -1,0 +1,15 @@
+﻿"Symbol";"Value";"Unit";
+"REFERENCE";"PMD1212PMB1-A (2).GN";"";
+"AIRFLOW";"190";"";
+"TraceParts.PartVersion";"1.0.5";"";
+"SUPPLIER";"SUNON";"";
+"TraceParts.PartNumber";"33-26102021-078766";"";
+"TraceParts.PartLanguage";"en";"";
+"DESIGN";"DC fan with outside dimensions 120x120x38 mm, power consumption 19.2 W, speed 4200 rpm, PMD1212PMB1-A (2).GN";"";
+"TraceParts.InstanceId";"33-26102021-078766CNXKBJ1YNK0CPQ226BPCBUPN3";"";
+"TraceParts.PartTitle";"SUNON DC Fan 120x120x38 mm";"";
+"POWER_CONSUMPTION";"19.2";"";
+"TRACEPARTS";"TRACEPARTS";"";
+"POWER_CURRENT";"1600";"";
+"SPEED";"4200";"";
+"RATED_VOLTAGE_II_2";"12";"";
